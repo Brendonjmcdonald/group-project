@@ -1,20 +1,4 @@
-button{
-	padding-top: 20px;
-	padding: 10px;
-	width: 60px;
-}
-.container{
-	background-color: black !important;
-	opacity: .7;
-	height: 100% !important;
-	top: 55% !important;
-	bottom: 0 !important;
-}
-.dropdown{
-	
-	
-	
-}
+
 .headerpic{
 	background: center no-repeat;
 	-webkit-background-size: cover;
@@ -52,20 +36,29 @@ button{
 img.headerPic.col-lg-12 {
 	padding: 0;
 }
-.typewriter h1 {
-	top: 37%;
-	left: 31%;
-	color: white;
+.section{
 	position: absolute;
+	margin: auto 0;
+	height: 60px;
+	top: 32%;
+	left: 20%;
+
+}
+.typewriter h1 {
+	
+	top: 40%;
+	left: 35%;
+	color: white;
+	position: relative;
 	text-align: center;
-	position: center;
+	
   overflow: hidden; /* Ensures the content is not revealed until the animation */
   border-right: .15em solid orange; /* The typwriter cursor */
   white-space: nowrap; /* Keeps the content on a single line */
   margin: 0 auto; /* Gives that scrolling effect as the typing happens */
   letter-spacing: .15em; /* Adjust as needed */
   animation: 
-    typing 3.5s steps(40, end),
+    typing 2.5s steps(40, end),
     blink-caret .75s step-end infinite;
 }
 
