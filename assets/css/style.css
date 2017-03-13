@@ -1,0 +1,40 @@
+body {
+	background-image: url("../../assets/images/goldengate.jpg");
+	background-size: auto;
+}
+
+.d-flex.justify-content-end {
+	background: rgba(0, 0, 0, .8);
+	color: #ffffff;
+}
+
+.row { 
+	background: rgba(0, 0, 0, .5);
+	min-height: 400px;
+	max-height: 1000px;
+	color: #ffffff;
+	box-sizing: border-box;
+}
+
+.col-sm-7, .col-sm-5 {
+	border: 1px solid #ffffff;
+	box-sizing: border-box;
+	padding: 0;
+}
+
+.footer {
+	position: absolute;
+	bottom: 0;
+	left: 0;
+	right: 0;
+	height: 100px;
+	width: 100%;
+	background: rgba(0, 0, 0, .8);
+	text-align: center;
+	color: #ffffff;
+
+}
+
+div.img p {
+	margin: 0;
+}
