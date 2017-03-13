@@ -1,0 +1,49 @@
+ <!-- With this we can set it to "tofit", "aspect" or a number. Aspect is you're best option, because it keeps the original ratio of the video in perspective. -->
+
+<!-- should avoid flash player videos if at all possible -->
+
+<embed src="our movie here" width="600" height="400" scale="aspect" controller="true">
+
+
+<!-- Alternate metod #1 This method includes the "full screen" option -->
+<iframe src="https://www.youtube.com/embed/FG0fTKAqZ5g" height="315" width="560" allowfullscreen="" frameborder="0">
+</iframe>
+
+<!-- Alernate method #2 This method does not allow the user to select the "full screen" option -->
+<embed src="https://www.youtube.com/v/FG0fTKAqZ5g&hl=en_US&fs=1&"
+type="application/x-shockwave-flash" allowscriptaccess="always"
+allowfullscreen="true" width="640" height="385">
+</embed>
+
+<!-- template for setting up ajax calls -->
+<script>
+
+	$.ajax({
+          url: queryURL,
+          method: "GET"
+        })
+      
+        .done(function(response) {
+        	// insert variables or arrays here
+        	// This will let us reload divs and ID's without resetting the rest of the page
+        	// can also set mthod to "push" depending on the situation
+        }
+
+
+// Template for initializing Firebase
+  var config = {
+    apiKey: "our stuff",
+    authDomain: "our stuff",
+    databaseURL: "https://our firebase stuff",
+    storageBucket: "our stuff",
+    messagingSenderId: "our number"
+  };
+  firebase.initializeApp(config);
+
+
+var database = firebase.database();
+
+$("#insert appropriate ID").on("click", function(event) {
+  event.preventDefault();        
+
+</script>          
