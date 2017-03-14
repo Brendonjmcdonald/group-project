@@ -11,15 +11,17 @@ body {
 
 /*Main row of the page */ 
 .row { 
+	box-sizing: border-box;
 	background: rgba(0, 0, 0, .5);
 	min-height: 400px;
 	max-height: 1000px;
 	color: #ffffff;
-	box-sizing: border-box;
+
 }
 
 /*The two columns inside the row */ 
 .col-sm-7, .col-sm-5 {
+	box-sizing: border-box;
 	border: 1px solid #ffffff;
 	box-sizing: border-box;
 	padding: 15px;
@@ -43,4 +45,14 @@ body {
 #title {
 	font-size: 26px;
 	font-weight: bolder;
+}
+
+form {
+	font-size: 18px;
+	font-weight: bold;
+}
+
+span {
+	font-weight: normal;
+	font-size: 1rem;
 }
