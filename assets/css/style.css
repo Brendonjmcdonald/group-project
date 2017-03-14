@@ -19,7 +19,8 @@ body {
 .col-sm-7, .col-sm-5 {
 	border: 1px solid #ffffff;
 	box-sizing: border-box;
-	padding: 0;
+	padding: 15px;
+	padding-left: 25px;
 }
 
 .footer {
@@ -37,4 +38,9 @@ body {
 
 div.img p {
 	margin: 0;
+}
+
+#title {
+	font-size: 26px;
+	font-weight: bolder;
 }
