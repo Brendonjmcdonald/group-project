@@ -8,6 +8,38 @@ body {
 	background: rgba(0, 0, 0, .8);
 	color: #ffffff;
 }
+#title-p{
+	font-family: Copperplate, "Copperplate Gothic Light", fantasy;
+	font-size: 30px;
+	color: white;
+	-webkit-text-stroke-width: 1px;
+   	-webkit-text-stroke-color: black;
+   	border-bottom: 5px solid black;
+}
+.event{
+	text-shadow:0px 1px 0px #810e05;
+}
+.date{
+	text-shadow:0px 1px 0px #810e05;
+}
+.time{
+	text-shadow:0px 1px 0px #810e05;
+}
+input{
+	padding: 3px;
+}
+#event-input{
+	padding: 3px;
+	text-shadow:0px 1px 0px black !important;
+}
+#date-input{
+	padding: 3px;
+	text-shadow:0px 1px 0px black !important;
+}
+#time-input{
+	padding: 3px;
+	text-shadow:0px 1px 0px black !important;
+}
 
 /*Main row of the page */ 
 .row { 
@@ -16,6 +48,11 @@ body {
 	min-height: 400px;
 	max-height: 1000px;
 	color: #ffffff;
+	-webkit-box-shadow: -1px 1px 2px 4px #810e05;
+ 	-moz-box-shadow: -1px 1px 2px 4px #810e05;
+ 	box-shadow: -1px 1px 2px 4px #810e05; 
+ 	padding-left: 10px;
+	padding-right: 2px;
 
 }
 
@@ -55,4 +92,30 @@ form {
 span {
 	font-weight: normal;
 	font-size: 1rem;
+}
+
+.video{
+	position: absolute;
+	margin: auto 0;
+	right: 4px;
+	top: 4px;
+	bottom: 4px;
+	padding-bottom: 5px;
+	padding-top: 5px;
+	padding-left: 5px;
+	padding-right: 5px;
+	opacity: 1;
+	-webkit-box-shadow: -1px 1px 4px 6px black;
+ 	-moz-box-shadow: -1px 1px 4px 6px black;
+ 	box-shadow: -1px 1px 4px 6px black; 
+}
+#input-display{
+	padding-left: 2px;
+	padding-right: 10px;
+	-webkit-box-shadow: -1px 1px 2px 4px #810e05;
+ 	-moz-box-shadow: -1px 1px 2px 4px #810e05;
+ 	box-shadow: -1px 1px 2px 4px #810e05; 
+
+	
+	
 }

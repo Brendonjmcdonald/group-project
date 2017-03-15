@@ -9,14 +9,14 @@ var dateList = ["Today ", "Week ", "Weekend ", "Month "];
 function radioButtons() {
 	for (i = 0; i < eventList.length; i++) {
 		var ids = $('#event'+ i);
-		var button = $('<input type="radio" > ');
+		var button = $('<input type="radio" name="choice1"> ');
 		button.attr("button-value", eventList[i]);
 		button.attr('id', 'eventList' + i);
 		$('#event-input').append(button, eventList[i]);
 	}
 
 	for (i= 0; i < dateList.length; i++) {
-		var button = $('<input type="radio" > ');
+		var button = $('<input type="radio" name="choice2" > ');
 		button.attr("button-value", dateList[i]);
 		button.attr('id', 'dateList' + i);
 		$('#date-input').append(button, dateList[i]);
@@ -29,3 +29,7 @@ $(document).ready(function() {
 radioButtons();
 
 });
+
+var videoSelection = 
+
+$(document).on("click", )
