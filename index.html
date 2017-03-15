@@ -17,9 +17,8 @@
 <body>
 <!--Navigation Bar-->
 <div class="d-flex justify-content-end">
-  <div class="mr-auto p-2" id="title">Event Finder</div>
-  <div class="p-2 nav-item nav-link" href="index.html">Homepage</div>
-  <div class="p-2 nav-item nav-link" href="aboutus.html">
+  <div class="mr-auto p-2" id="title">Following Reuben's Trail</div>
+  <div type="button" id="aboutUs" class="p-2 nav-item nav-link" href="aboutus.html">
   About Us</div>
 <!--End of navigation bar div-->  
 </div>
@@ -29,20 +28,12 @@
 
 <!--Where the information will be inputted -->
 <div class="row">
-  <div class="col-sm-5">
+  <div class="col-sm-3">
     <form>
-      <p id="title-p">Search Options for Events:</p>
+      <p>Filter Results:</p>
 <!--Where the event radio buttons will generate -->       
         <div class ="event">
-          Event Categories: <span id="event-input"></span>
-        </div><br />
-<!--Where the date will be inputted -->           
-        <div class="date">
-          Date: <span id="date-input"></span>
-        </div><br />
-<!--Where the time wil be inputted -->           
-        <div class="time">
-          Time: <span id="time-input">Test3</span>
+          <span id="filter-input"></span>
         </div><br />
 <!--Where the city and state info will be inputted -->    
       <input id="location-input" type="text" value="City, State">
@@ -57,8 +48,8 @@
 
 
 <!--Where the information will be displayed --> 
-  <div id="input-display" class="col-sm-7">
-    <div class ="map">
+  <div id="input-display" class="col-sm-9">
+  <!--   <div class ="map">
     </div>
 
     <iframe class ="video" width="380" height="380" src="https://www.youtube.com/embed/ljS6nJlDUsQ?autoplay=1" frameborder="0" allowfullscreen></iframe>
@@ -66,7 +57,7 @@
     <br>
 
     
-  </div>
+  </div> -->
 <!--End of the main two columns -->  
 </div>
 <!--- ////////////////////////////////////////// -->
