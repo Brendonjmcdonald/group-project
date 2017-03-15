@@ -59,6 +59,28 @@ $(document).ready(function() {
     event.preventDefault();
 	});
 
+
+// var queryURL = "https://trailapi-trailapi.p.mashape.com/" 
+
+		$.ajax({
+    url: "https://trailapi-trailapi.p.mashape.com/", // The URL to the API. You can get this by clicking on "Show CURL example" from an API profile
+    type: 'GET', // The HTTP Method
+    data: {}, // Additional parameters here
+    datatype: 'json',
+    //success: function(data) { alert(JSON.stringify(data)); },
+    error: function(err) { alert(err); },
+    beforeSend: function(xhr) {
+    xhr.setRequestHeader("X-Mashape-Authorization", "NQTdn7V99JmshrgWNZDbdFehWFX8p17WiaijsnBkVdo5einCNy"); // Enter here your Mashape key
+    }
+}).done(function(response){
+console.log(response);
+})
+		
+
+
+});
+
+
 });
 
 // var queryURL = "https://trailapi-trailapi.p.mashape.com/" 
@@ -75,7 +97,12 @@ $(document).ready(function() {
 //     }
 // 	})
 
+
 // .done(function(response){
 // console.log(response);
 // })
 		
+
+$(document).on("click", )
+
+
