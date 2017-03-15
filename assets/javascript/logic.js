@@ -1,6 +1,10 @@
 var place = "";
 var filterList = [" hiking ", " camping ", " caving ", " trail running ", " snow sports ", " horseback riding ", " atv ", " water sports "];
 
+//Variables that can change for google maps parameters
+var lat = 28.741898;
+var lng = -81.305587;
+var zoom = 12;
 
 //functions that will generate the list of buttons for some of the variable selections
 function checkBox() {
@@ -13,43 +17,49 @@ function checkBox() {
 
 };
 
-	function initMap() {
-	    	mapDiv = document.getElementById('input-display');
-	    	map = new google.maps.Map(mapDiv, {
-	    	//set center of map on load
-			center: {lat: 28.741898, lng:  -81.305587},
-			//set zoom, lower number means zoom out, and vice versa
-			zoom: 12,
-			//you can set map type to roadmap, terrain, satellite, or hybrid
-			mapTypeId: 'hybrid',
-			//If you plan to move a control on the screen
-			//it is recommened to set that control to true to always show
-			mapTypeControl: true,
-			//this sets the position, go to docs to see other positions
-			mapTypeControlOptions: {
-			position: google.maps.ControlPosition.TOP_LEFT
-			},
-			//same as before, just different controls
-			fullscreenControl: true,
-			fullscreenControlOptions: {
-			position: google.maps.ControlPosition.LEFT_TOP
-			},
-			streetViewControl: true,
-			streetViewControlOptions: {
-			position: google.maps.ControlPosition.LEFT_TOP 
-			},
-			zoomControl: true,
-			zoomControlOptions: {
-			position: google.maps.ControlPosition.LEFT_TOP
-			}
-		});
+//this is the function that runs at the end of the googleAPI script 
+function initMap() {
+//where the map will be displayed	
+	mapDiv = $('#input-display');
+//generating the map with the specific parameters	
+	map = new google.maps.Map(mapDiv[0], {
+//set center of map on load
+	center: {lat: lat, lng: lng},
+//set zoom, lower number means zoom out, and vice versa
+	zoom: zoom,
+//you can set map type to roadmap, terrain, satellite, or hybrid
+	mapTypeId: 'hybrid',
+//If you plan to move a control on the screen
+//it is recommened to set that control to true to always show
+	mapTypeControl: true,
+//this sets the position, go to docs to see other positions
+	mapTypeControlOptions: {
+	position: google.maps.ControlPosition.TOP_LEFT
+	},
+//same as before, just different controls
+	fullscreenControl: true,
+	fullscreenControlOptions: {
+	position: google.maps.ControlPosition.LEFT_TOP
+	},
+	streetViewControl: true,
+	streetViewControlOptions: {
+	position: google.maps.ControlPosition.LEFT_TOP 
+	},
+	zoomControl: true,
+	zoomControlOptions: {
+	position: google.maps.ControlPosition.LEFT_TOP
 	}
+});
+}
 
 //When the page loads, this will run
 $(document).ready(function() {
 
 checkBox();
 
+
+
+});
 
 // var queryURL = "https://trailapi-trailapi.p.mashape.com/" 
 
@@ -69,6 +79,3 @@ checkBox();
 // console.log(response);
 // })
 		
-
-
-});
