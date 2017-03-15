@@ -54,10 +54,10 @@ function initMap() {
 
 //When the page loads, this will run
 $(document).ready(function() {
-
-checkBox();
-
-
+	checkBox();
+ 	$("#submit-button").on("click", function(event) {
+    event.preventDefault();
+	});
 
 });
 
