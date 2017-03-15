@@ -1,5 +1,5 @@
 body {
-	background-image: url("../../assets/images/goldengate.jpg");
+	background-image: url("../../assets/images/picnic.jpg");
 	background-size: auto;
 }
 
@@ -8,56 +8,31 @@ body {
 	background: rgba(0, 0, 0, .8);
 	color: #ffffff;
 }
-#title-p{
-	font-family: Copperplate, "Copperplate Gothic Light", fantasy;
-	font-size: 30px;
-	color: white;
-	-webkit-text-stroke-width: 1px;
-   	-webkit-text-stroke-color: black;
-   	border-bottom: 5px solid black;
+
+div.p-2.nav-item.nav-link {
+	background: rgba(0, 0, 0, .8);
 }
-.event{
-	text-shadow:0px 1px 0px #810e05;
-}
-.date{
-	text-shadow:0px 1px 0px #810e05;
-}
-.time{
-	text-shadow:0px 1px 0px #810e05;
-}
+
 input{
 	padding: 3px;
-}
-#event-input{
-	padding: 3px;
-	text-shadow:0px 1px 0px black !important;
-}
-#date-input{
-	padding: 3px;
-	text-shadow:0px 1px 0px black !important;
-}
-#time-input{
-	padding: 3px;
-	text-shadow:0px 1px 0px black !important;
 }
 
 /*Main row of the page */ 
 .row { 
 	box-sizing: border-box;
 	background: rgba(0, 0, 0, .5);
-	min-height: 400px;
-	max-height: 1000px;
+	height: 600px;
 	color: #ffffff;
-	-webkit-box-shadow: -1px 1px 2px 4px #810e05;
- 	-moz-box-shadow: -1px 1px 2px 4px #810e05;
- 	box-shadow: -1px 1px 2px 4px #810e05; 
+	-webkit-box-shadow: -1px 1px 2px 4px #498104;
+ 	-moz-box-shadow: -1px 1px 2px 4px #498104;
+ 	box-shadow: -1px 1px 2px 4px #498104; 
  	padding-left: 10px;
 	padding-right: 2px;
 
 }
 
 /*The two columns inside the row */ 
-.col-sm-7, .col-sm-5 {
+.col-sm-9, .col-sm-3 {
 	box-sizing: border-box;
 	border: 1px solid #ffffff;
 	box-sizing: border-box;
@@ -94,7 +69,7 @@ span {
 	font-size: 1rem;
 }
 
-.video{
+/*.video{
 	position: absolute;
 	margin: auto 0;
 	right: 4px;
@@ -107,14 +82,14 @@ span {
 	opacity: 1;
 	-webkit-box-shadow: -1px 1px 4px 6px black;
  	-moz-box-shadow: -1px 1px 4px 6px black;
- 	box-shadow: -1px 1px 4px 6px black; 
+ 	box-shadow: -1px 1px 4px 6px black; */
 }
 #input-display{
 	padding-left: 2px;
 	padding-right: 10px;
-	-webkit-box-shadow: -1px 1px 2px 4px #810e05;
- 	-moz-box-shadow: -1px 1px 2px 4px #810e05;
- 	box-shadow: -1px 1px 2px 4px #810e05; 
+	-webkit-box-shadow: -1px 1px 2px 4px #498104;
+ 	-moz-box-shadow: -1px 1px 2px 4px #498104;
+ 	box-shadow: -1px 1px 2px 4px #498104; 
 
 	
 	

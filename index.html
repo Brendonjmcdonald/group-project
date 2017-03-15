@@ -12,14 +12,20 @@
     <!--Personal CSS/IMAGES folders -->
     <link href="assets/css/style.css" rel="stylesheet" type="text/css">
     <link href="assets/images">
+<!--jQuery 3.1.1 needed?-->
+    <script
+    src="https://code.jquery.com/jquery-3.1.1.min.js"
+    integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8="
+    crossorigin="anonymous"></script>
 </head>
 
 <body>
 <!--Navigation Bar-->
 <div class="d-flex justify-content-end">
-  <div class="mr-auto p-2" id="title">Event Finder</div>
-  <div class="p-2 nav-item nav-link" href="index.html">Homepage</div>
-  <div class="p-2 nav-item nav-link" href="aboutus.html">
+  <div class="mr-auto p-2" id="title">Following Reuben's Trail</div>
+  <div type="button" id="homepage" class="p-2 nav-item nav-link" href="index.html">
+  Homepage</div>
+  <div type="button" id="aboutUs" class="p-2 nav-item nav-link" href="aboutus.html">
   About Us</div>
 <!--End of navigation bar div-->  
 </div>
@@ -29,23 +35,15 @@
 
 <!--Where the information will be inputted -->
 <div class="row">
-  <div class="col-sm-5">
+  <div class="col-sm-3">
     <form>
-      <p id="title-p">Search Options for Events:</p>
+      <p>Filter Results:</p>
 <!--Where the event radio buttons will generate -->       
         <div class ="event">
-          Event Categories: <span id="event-input"></span>
+          <span id="filter-input"></span>
         </div><br />
-<!--Where the date will be inputted -->           
-        <div class="date">
-          Date: <span id="date-input"></span>
-        </div><br />
-<!--Where the time wil be inputted -->           
-        <div class="time">
-          Time: <span id="time-input">Test3</span>
-        </div><br />
-<!--Where the city and state info will be inputted -->    
-      <input id="location-input" type="text" value="City, State">
+<!--Where the city and state info will be inputted -->   
+      <input id="location-input" type="textbox" value="Enter location" onfocus="if (this.value=='Enter location') this.value='';"/>
       <br />
       <br />
 <!--When Clicked will push all the selected information above to GET API responses -->         
@@ -57,8 +55,8 @@
 
 
 <!--Where the information will be displayed --> 
-  <div id="input-display" class="col-sm-7">
-    <div class ="map">
+  <div id="input-display" class="col-sm-9">
+  <!--   <div class ="map">
     </div>
 
     <iframe class ="video" width="380" height="380" src="https://www.youtube.com/embed/ljS6nJlDUsQ?autoplay=1" frameborder="0" allowfullscreen></iframe>
@@ -66,7 +64,7 @@
     <br>
 
     
-  </div>
+  </div> -->
 <!--End of the main two columns -->  
 </div>
 <!--- ////////////////////////////////////////// -->
@@ -80,9 +78,16 @@
   </div>
 </div>
 
+
+<!--Personal javascript-->
+=======
 <script src="https://code.jquery.com/jquery-2.1.3.min.js"></script>
 
+
 <script src="assets/javascript/logic.js" type="text/javascript"></script>
+
+<!--This is the script needed to run the google api with key attached -->
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBgpkx2l_pbdRWtr5TvjIiU02DbgYaAO7Y&callback=initMap" type="text/javascript"></script>
 
 </body>
 </html>
