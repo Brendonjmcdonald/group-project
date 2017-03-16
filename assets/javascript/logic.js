@@ -6,8 +6,8 @@ var lng = -81.305587;
 var zoom = 12;
 
 //variables to change the location of google maps (state abbreviations work, also doesn't matter upper or lowercase)
-var city = "orlando";
-var state = "florida";
+var city = "";
+var state = "";
 
 //assuming that when the checkbox is selected, then each variable will before true and be added to the search
 var hiking = false;
@@ -68,6 +68,46 @@ function initMap() {
 //End of the initMap function			
 }
 
+function trailFinder (city, state) {
+	console.log(city);
+  	console.log(state);
+	$.ajax({
+    url: "https://trailapi-trailapi.p.mashape.com/", 
+    type: 'GET',
+//parameters that can be changed    
+    data: {
+//set limit by me    	
+    	'limit': 10,
+    	// 'q[activities_activity_type_name_eq]': null,
+//set limit by me      	
+    	'radius': 50,
+//changed based of var city    	
+    	'q[city_cont]': city,
+//changed based of var state    	
+    	'q[state_cont]': state
+		}, 
+// Additional parameters here
+    datatype: 'json',
+//success: function(data) { alert(JSON.stringify(data)); },
+    error: function(err) { alert(err); },
+    beforeSend: function(xhr) {
+// Enter here your Mashape key   	
+    xhr.setRequestHeader("X-Mashape-Authorization", "NQTdn7V99JmshrgWNZDbdFehWFX8p17WiaijsnBkVdo5einCNy");
+    	}
+	})
+
+.done(function(response) {
+
+	for (i=0; i<1; i++) {
+
+//object is places	 	
+	console.log(response.places[i]);
+	console.log(this);
+	}
+	});
+
+}
+
 function markerGenerator() {		
 // creates a marker
 	var marker = new google.maps.Marker({
@@ -91,7 +131,9 @@ $(window).on("load", function() {
 	checkBox();
  	$("#submit-button").on("click", function(event) {
     	event.preventDefault();
-
+    	city = $('#city-input').val();
+    	state = $('#state-input').val();
+    	trailFinder(city, state);
 	});
 
 //console log gives me 50, because its giving the direct link count til it reaches that string , so it is basically 50 > -1    	
@@ -130,9 +172,9 @@ $.ajax({
 //set limit by me      	
     	'radius': 50,
 //changed based of var city    	
-    	'q[city_cont]': city,
+    	'q[city_cont]': "Orlando",
 //changed based of var state    	
-    	'q[state_cont]': state
+    	'q[state_cont]': "Florida"
 		}, 
 // Additional parameters here
     datatype: 'json',
@@ -143,16 +185,6 @@ $.ajax({
     xhr.setRequestHeader("X-Mashape-Authorization", "NQTdn7V99JmshrgWNZDbdFehWFX8p17WiaijsnBkVdo5einCNy");
     	}
 	})
-
-.done(function(response) {
-	// markerGenerator()
-	 for (i=0; i<1; i++) {
-
-//object is places	 	
-console.log(response.places[i]);
-console.log(this);
-}
-});
 
 //End of the window.onload function
 });

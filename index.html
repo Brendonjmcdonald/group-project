@@ -35,14 +35,16 @@
 <!--Where the event radio buttons will generate -->       
         <div class ="event">
           <span id="filter-input"></span>
-        </div><br />
-<!--Where the city and state info will be inputted -->   
+        </div><br /><hr />
+<!--Where the city and state info will be inputted -->
+      <p>City:</p>   
       <input id="city-input" type="textbox" value="Enter City" onfocus="if (this.value=='Enter City') this.value='';"/><br /><br />
+      <p>State:</p>   
       <input id="state-input" type="textbox" value="Enter State" onfocus="if (this.value=='Enter State') this.value='';"/>
       <br />
       <br />
 <!--When Clicked will push all the selected information above to GET API responses -->         
-      <button id="submit-button">Submit</button>  
+      <button id="submit-button" value="submit">Submit</button>  
     </form>
   </div>
 

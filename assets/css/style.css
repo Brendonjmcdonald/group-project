@@ -17,7 +17,9 @@ div.p-2.nav-item.nav-link {
 input{
 	padding: 3px;
 }
-
+ hr {
+ 	border-color: white;
+ }
 /*Main row of the page */ 
 .row { 
 	width: 100%;
