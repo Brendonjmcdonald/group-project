@@ -1,9 +1,13 @@
 var filterList = [" hiking ", " camping ", " caving ", " trail running ", " snow sports ", " horseback riding ", " atv ", " water sports "];
 
-//Variables that can change for google maps parameters
+//Set variables for windows loading page
 var lat = 28.741898;
 var lng = -81.305587;
 var zoom = 12;
+
+//variables to change the location of google maps (state abbreviations work, also doesn't matter upper or lowercase)
+var city = "orlando";
+var state = "florida";
 
 //assuming that when the checkbox is selected, then each variable will before true and be added to the search
 var hiking = false;
@@ -23,7 +27,7 @@ function checkBox() {
 		button.attr('id', 'filterList' + i);
 		$('#filter-input').append(button, filterList[i] + "<br />");
 	}
-
+// End of the checkbox function
 };
 
 
@@ -59,9 +63,12 @@ function initMap() {
 		zoomControl: true,
 		zoomControlOptions: {
 		position: google.maps.ControlPosition.LEFT_TOP
-		}
-	});
-		
+		}	
+		});
+//End of the initMap function			
+}
+
+function markerGenerator() {		
 // creates a marker
 	var marker = new google.maps.Marker({
 		position: {lat: 28.741898, lng:-81.305587},
@@ -76,10 +83,11 @@ function initMap() {
 	google.maps.event.addListener(marker, 'click', function(){
 		infowindow.open(map, marker);
 	});
+//End of the markerGenerator function
 }
 
 //When the page loads, this will run
-$(window).ready(function() {
+$(window).on("load", function() {
 	checkBox();
  	$("#submit-button").on("click", function(event) {
     	event.preventDefault();
@@ -114,12 +122,17 @@ console.log(window.location.href);
 $.ajax({
     url: "https://trailapi-trailapi.p.mashape.com/", 
     type: 'GET',
+//parameters that can be changed    
     data: {
-    	'lat': lat,
-    	'lon': lng,
+//set limit by me    	
     	'limit': 10,
-    	'q[activities_activity_type_name_eq]': filterList[(Math.floor(Math.random() * filterList.length) + 1)].trim().toString(),
-    	'radius': 50
+    	// 'q[activities_activity_type_name_eq]': null,
+//set limit by me      	
+    	'radius': 50,
+//changed based of var city    	
+    	'q[city_cont]': city,
+//changed based of var state    	
+    	'q[state_cont]': state
 		}, 
 // Additional parameters here
     datatype: 'json',
@@ -130,10 +143,14 @@ $.ajax({
     xhr.setRequestHeader("X-Mashape-Authorization", "NQTdn7V99JmshrgWNZDbdFehWFX8p17WiaijsnBkVdo5einCNy");
     	}
 	})
-	.done(function(response){
-	})
-		
 
-//End of the window.ready function
+.done(function(response) {
+
+	 for (i=0; i<1; i++) {
+console.log(response.places[i]);
+console.log(this);
+}
 });
 
+//End of the window.onload function
+});
