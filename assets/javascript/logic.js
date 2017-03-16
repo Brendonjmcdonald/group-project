@@ -94,9 +94,12 @@ function initMap() {
 		position: google.maps.ControlPosition.LEFT_TOP
 		}	
 		});
+		
+		autoSearch = new google.maps.places.Autocomplete(document.getElementById('name-input'));
 //End of the initMap function			
 }
 
+//Function to log in city and state parameters and display results via trailAPI
 function trailFinder (city, state) {
 	console.log(city);
   	console.log(state);
@@ -135,6 +138,7 @@ function trailFinder (city, state) {
 	}
 	});
 
+//End of trailFinder function
 }
 
 function markerGenerator() {		
