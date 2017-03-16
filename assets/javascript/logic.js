@@ -9,6 +9,9 @@ var zoom = 12;
 var city = "";
 var state = "";
 var name = "";
+var markers = [];
+var latitude = 0;
+var longitude = 0;
 
 //assuming that when the checkbox is selected, then each variable will before true and be added to the search
 var hiking = false;
@@ -66,22 +69,22 @@ function checkBox() {
 function initMap() {
 //where the map will be displayed	
 		mapDiv = $('#input-display');
-	//generating the map with the specific parameters	
+//generating the map with the specific parameters	
 		map = new google.maps.Map(mapDiv[0], {
-	//set center of map on load
+//set center of map on load
 		center: {lat: lat, lng: lng},
-	//set zoom, lower number means zoom out, and vice versa
+//set zoom, lower number means zoom out, and vice versa
 		zoom: zoom,
-	//you can set map type to roadmap, terrain, satellite, or hybrid
+//you can set map type to roadmap, terrain, satellite, or hybrid
 		mapTypeId: 'hybrid',
-	//If you plan to move a control on the screen
-	//it is recommened to set that control to true to always show
+//If you plan to move a control on the screen
+//it is recommened to set that control to true to always show
 		mapTypeControl: true,
-	//this sets the position, go to docs to see other positions
+//this sets the position, go to docs to see other positions
 		mapTypeControlOptions: {
 		position: google.maps.ControlPosition.TOP_LEFT
 		},
-	//same as before, just different controls
+//same as before, just different controls
 		fullscreenControl: true,
 		fullscreenControlOptions: {
 		position: google.maps.ControlPosition.LEFT_TOP
@@ -101,10 +104,13 @@ function initMap() {
 //End of the initMap function			
 }
 
+// ------------------------------------------------------
+
 //Function to log in city and state parameters and display results via trailAPI
-function trailFinder (city, state) {
+function trailFinder (city, state, latitude, longitude) {
 	console.log(city);
   	console.log(state);
+  	console.log(latitude);
 	$.ajax({
     url: "https://trailapi-trailapi.p.mashape.com/", 
     type: 'GET',
@@ -115,10 +121,14 @@ function trailFinder (city, state) {
     	// 'q[activities_activity_type_name_eq]': null,
 //set limit by me      	
     	'radius': 50,
-//changed based of var city    	
+//changed based on var city    	
     	'q[city_cont]': city,
-//changed based of var state    	
-    	'q[state_cont]': state
+//changed based on var state    	
+    	'q[state_cont]': state,
+//changed based on var latitude    	
+    	'lat': latitude,
+//changed based on var longitude    	
+    	'lon': longitude,
 		}, 
 // Additional parameters here
     datatype: 'json',
@@ -143,23 +153,9 @@ function trailFinder (city, state) {
 //End of trailFinder function
 }
 
-// function markerGenerator() {		
-// // creates a marker
-// 	var marker = new google.maps.Marker({
-// 		position: {lat: 28.741898, lng:-81.305587},
-// 		map: map,
-// 		clickableIcons: true,
-// 	});
-// // creates the information to be displayed when clicked
-// 	var infowindow = new google.maps.InfoWindow({
-// 		content: '<p id="Trail1">Trail Name ' + 'Activity' + marker.getPosition() + '</p>',
-// 	});
 
-// 	google.maps.event.addListener(marker, 'click', function(){
-// 		infowindow.open(map, marker);
-// 	});
-// //End of the markerGenerator function
-// }
+// ------------------------------------------------------
+
 
 //When the page loads, this will run
 $(window).on("load", function() {
@@ -170,35 +166,49 @@ $(window).on("load", function() {
     	state = $('#state-input').val();
     	name = $('#name-input').val();
     	trailFinder(city, state);
-    	$('#city').text(city.toUpperCase() + ", ");
+    	$('#city').text(city.toUpperCase() + " ");
     	$('#state').text(state.toUpperCase()); 
     	$('#state-input').val("");
     	$('#city-input').val("");
 //get the search value
   		var searchValue = $("#name-input").val();
-  		//use geocoder
-  		//the first parameter is an object with 'address', which is used if you
-  		//want to get coordinates from an address
-  		//to get an address from coordinates, use 
-  		//{'location': {'lat': 28.5383355, 'lng': -81.37923649999999}}
-  		//the second parameter is a callback function
+//use geocoder
+//the first parameter is an object with 'address', which is used if you
+//want to get coordinates from an address
+//to get an address from coordinates, use 
+//{'location': {'lat': 28.5383355, 'lng': -81.37923649999999}}
+//the second parameter is a callback function
   		geocoder.geocode({'address': searchValue}, function(results, status) {
-
 	  		if(status === 'OK') {
-
-	  			//results is going to be the address, but it is 
-	  			//going to give you a multiple choices in an array
-	  			//the first is probably the most accurate, so results[0] is your best bet.
-	  			//geometry.location is where you need to go to get
-	  			//the latitude and longitude, using the lat() and lng() functions
+//results is going to be the address, but it is 
+//going to give you a multiple choices in an array
+//the first is probably the most accurate, so results[0] is your best bet.
+//geometry.location is where you need to go to get
+//the latitude and longitude, using the lat() and lng() functions
 	  			var geometry = results[0].geometry.location;
 	  			latitude = geometry.lat();
 	  			longitude = geometry.lng();
 	  			console.log('lat: ' + latitude + ', lng: ' + longitude);
-	  			}
+//set a marker at location
+	  			var marker = new google.maps.Marker({
+					position: {'lat': latitude, 'lng': longitude},
+					map: map
+				});
+//center the map to the marker position
+				marker.addListener('click', function() {
+					//this refers to the marker that is clicked
+				map.setCenter(this.getPosition());
+				});
+//center the map to the marker position
+				map.setCenter(marker.getPosition());
+				}
+//End of the geocode/marker function	  			
 	  	});
 //End of the submit-button function	  	
 	});
+
+// ------------------------------------------------------
+
 
 //console log gives me 50, because its giving the direct link count til it reaches that string , so it is basically 50 > -1    	
 console.log(window.location.href);
@@ -224,7 +234,7 @@ console.log(window.location.href);
 
 // --------------------------------------------
 
-//Calling a jQuery ajax function to pull information 
+//initial Calling a jQuery ajax function to pull information 
 $.ajax({
     url: "https://trailapi-trailapi.p.mashape.com/", 
     type: 'GET',
