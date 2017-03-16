@@ -17,6 +17,8 @@ function checkBox() {
 
 };
 
+
+
 //this is the function that runs at the end of the googleAPI script 
 function initMap() {
 //where the map will be displayed	
@@ -50,6 +52,22 @@ function initMap() {
 	position: google.maps.ControlPosition.LEFT_TOP
 	}
 });
+
+	// creates a marker
+	var marker = new google.maps.Marker({
+		position: {lat: 28.741898, lng:-81.305587},
+		map: map,
+		clickableIcons: true,
+	});
+
+	// creates the information to be displayed when clicked
+	var infowindow = new google.maps.InfoWindow({
+		content: '<p>Trail Name ' + 'Activity' + marker.getPosition() + '</p>',
+	});
+
+	google.maps.event.addListener(marker, 'click', function(){
+		infowindow.open(map, marker);
+	});
 }
 
 //When the page loads, this will run
@@ -65,7 +83,14 @@ $(document).ready(function() {
 		$.ajax({
     url: "https://trailapi-trailapi.p.mashape.com/", // The URL to the API. You can get this by clicking on "Show CURL example" from an API profile
     type: 'GET', // The HTTP Method
-    data: {}, // Additional parameters here
+    data: {
+    	// 'lat':
+    	// 'lon':
+    	'limit': '5',
+    	// 'q[activities_activity_type_name_eq]':
+    	// 'radius': '50',
+
+    }, // Additional parameters here
     datatype: 'json',
     //success: function(data) { alert(JSON.stringify(data)); },
     error: function(err) { alert(err); },
@@ -73,7 +98,19 @@ $(document).ready(function() {
     xhr.setRequestHeader("X-Mashape-Authorization", "NQTdn7V99JmshrgWNZDbdFehWFX8p17WiaijsnBkVdo5einCNy"); // Enter here your Mashape key
     }
 }).done(function(response){
-console.log(response);
+
+	 for (var i=0; i<5; i++){
+
+// console.log(response);
+console.log(response.places[i]);
+// console.log(response.places[i].city);
+// console.log(response.places[i].name);
+// console.log(response.places[i].lat);
+// console.log(response.places[i].lon);
+console.log(response.places[i].activities[0]);
+
+}
+
 })
 		
 
@@ -81,7 +118,6 @@ console.log(response);
 });
 
 
-});
 
 // var queryURL = "https://trailapi-trailapi.p.mashape.com/" 
 
@@ -103,6 +139,6 @@ console.log(response);
 // })
 		
 
-$(document).on("click", )
+// $(document).on("click", )
 
 
