@@ -183,7 +183,8 @@ $(window).on("load", function() {
 	  			var geometry = results[0].geometry.location;
 	  			latitude = geometry.lat();
 	  			longitude = geometry.lng();
-	  			console.log('lat: ' + latitude + ', lng: ' + longitude);
+	  			console.log('latitude: ' + latitude);
+	  			console.log('longitude: ' + longitude);
 //set a marker at location
 	  			var marker = new google.maps.Marker({
 					position: {'lat': latitude, 'lng': longitude},
