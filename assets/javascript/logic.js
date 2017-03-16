@@ -145,8 +145,10 @@ $.ajax({
 	})
 
 .done(function(response) {
-
+	// markerGenerator()
 	 for (i=0; i<1; i++) {
+
+//object is places	 	
 console.log(response.places[i]);
 console.log(this);
 }
