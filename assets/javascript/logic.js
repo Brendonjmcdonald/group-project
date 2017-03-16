@@ -207,7 +207,7 @@ $(window).on("load", function() {
 //End of the submit-button function	  	
 	});
 
-// ------------------------------------------------------
+// --------------------------------------------------------
 
 
 //console log gives me 50, because its giving the direct link count til it reaches that string , so it is basically 50 > -1    	
