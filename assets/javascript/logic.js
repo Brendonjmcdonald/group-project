@@ -1,15 +1,13 @@
 var filterList = [" hiking ", " camping ", " caving ", " trail running ", " snow sports ", " horseback riding ", " atv ", " water sports "];
 
-//Set variables for windows loading page
+//Set variables for windows loading page (This is Lake Mary, Fl)
 var lat = 28.741898;
 var lng = -81.305587;
-var zoom = 12;
+var zoom = 10;
+var activities = "";
 
-//variables to change the location of google maps (state abbreviations work, also doesn't matter upper or lowercase)
-var city = "";
-var state = "";
-var name = "";
-var markers = [];
+//variables to change the location of google maps
+// var markers = [];
 // var latitude = 0;
 // var longitude = 0;
 
@@ -104,13 +102,8 @@ function initMap() {
 //End of the initMap function			
 }
 
-// ------------------------------------------------------
-
-//Function to log in city and state parameters and display results via trailAPI
+//Function that pushes lat and long parameters and display results via trailAPI markers
 function trailFinder (latitude, longitude) {
-	console.log(city);
-  	console.log(state);
-  	console.log(latitude);
 	$.ajax({
     url: "https://trailapi-trailapi.p.mashape.com/", 
     type: 'GET',
@@ -118,42 +111,47 @@ function trailFinder (latitude, longitude) {
     data: {
 //set limit by me    	
     	'limit': 10,
-    	// 'q[activities_activity_type_name_eq]': null,
+//will be used for filter options    	
+    	'q[activities_activity_type_name_eq]': activities,
 //set limit by me      	
     	'radius': 50,
-//changed based on var city    	
-    	'q[city_cont]': city,
-//changed based on var state    	
-    	'q[state_cont]': state,
-//changed based on var latitude    	
-    	'lat': latitude,
-//changed based on var longitude    	
+//not needed anymore   	
+//     	'q[city_cont]': null,   	
+//     	'q[state_cont]': null,
+//uses parameters from google maps search  	
+    	'lat': latitude,  	
     	'lon': longitude
 		}, 
-// Additional parameters here
     datatype: 'json',
 //success: function(data) { alert(JSON.stringify(data)); },
     error: function(err) { alert(err); },
     beforeSend: function(xhr) {
-// Enter here your Mashape key   	
+// Mashape key from TrailAPI
     xhr.setRequestHeader("X-Mashape-Authorization", "NQTdn7V99JmshrgWNZDbdFehWFX8p17WiaijsnBkVdo5einCNy");
     	}
 	})
 
+//When the ajax call is DONE, do this below
 .done(function(response) {
-
-	for (i=0; i<3; i++) {
-
-//object is places	 	
+//Checking to see if the lat and long are really from google maps	
+	console.log('google latitude: ' + latitude);
+	console.log('google longitude: ' + longitude);
+//Creating a for loop to generate a marker for 10 places, "places" is the object when using trailAPI website	
+	for (i=0; i<10; i++) {
+//Checking to see the places that will be displayed via console.log 	
 	console.log(response.places[i]);
+//Creating a marker at each place location
+	 marker = new google.maps.Marker({
+		position: {'lat': response.places[i].lat, 'lng': response.places[i].lon},
+		map: map
+				});
+//End of the for loop
 	}
-	});
+
+});
 
 //End of trailFinder function
 }
-
-
-// ------------------------------------------------------
 
 
 //When the page loads, this will run
@@ -172,38 +170,34 @@ $(window).on("load", function() {
 //{'location': {'lat': 28.5383355, 'lng': -81.37923649999999}}
 //the second parameter is a callback function
   		geocoder.geocode({'address': searchValue}, function(results, status) {
-	  		if(status === 'OK') {
+	  	if(status === 'OK') {
 //results is going to be the address, but it is 
 //going to give you a multiple choices in an array
 //the first is probably the most accurate, so results[0] is your best bet.
 //geometry.location is where you need to go to get
 //the latitude and longitude, using the lat() and lng() functions
-	  			var geometry = results[0].geometry.location;
-	  			latitude = geometry.lat();
-	  			longitude = geometry.lng();
-	  			trailFinder(latitude, longitude);
-	  			console.log('latitude: ' + latitude);
-	  			console.log('longitude: ' + longitude);
+  			var geometry = results[0].geometry.location;
+  			latitude = geometry.lat();
+  			longitude = geometry.lng();
+  			trailFinder(latitude, longitude);
 //set a marker at location
-	  			var marker = new google.maps.Marker({
-					position: {'lat': latitude, 'lng': longitude},
-					map: map
-				});
+  			var marker = new google.maps.Marker({
+				position: {'lat': latitude, 'lng': longitude},
+				map: map
+			});
 //center the map to the marker position
-				marker.addListener('click', function() {
-					//this refers to the marker that is clicked
-				map.setCenter(this.getPosition());
-				});
+			marker.addListener('click', function() {
+				//this refers to the marker that is clicked
+			map.setCenter(this.getPosition());
+			});
 //center the map to the marker position
-				map.setCenter(marker.getPosition());
-				}
+			map.setCenter(marker.getPosition());
+			}
 //End of the geocode/marker function	  			
 	  	});
 //End of the submit-button function	  
     $('#name-input').val("");	
 	});
-
-// --------------------------------------------------------
 
 
 //console log gives me 50, because its giving the direct link count til it reaches that string , so it is basically 50 > -1    	
@@ -228,32 +222,31 @@ console.log(window.location.href);
 		};
 	});
 
-
-//initial Calling a jQuery ajax function to pull information 
-$.ajax({
-    url: "https://trailapi-trailapi.p.mashape.com/", 
-    type: 'GET',
-//parameters that can be changed    
-    data: {
-//set limit by me    	
-    	'limit': 10,
-    	// 'q[activities_activity_type_name_eq]': null,
-//set limit by me      	
-    	'radius': 50,
-//changed based of var city    	
-    	'q[city_cont]': "Orlando",
-//changed based of var state    	
-    	'q[state_cont]': "Florida"
-		}, 
-// Additional parameters here
-    datatype: 'json',
-//success: function(data) { alert(JSON.stringify(data)); },
-    error: function(err) { alert(err); },
-    beforeSend: function(xhr) {
-// Enter here your Mashape key   	
-    xhr.setRequestHeader("X-Mashape-Authorization", "NQTdn7V99JmshrgWNZDbdFehWFX8p17WiaijsnBkVdo5einCNy");
-    	}
-	})
+// //initial Calling a jQuery ajax function to pull information 
+// $.ajax({
+//     url: "https://trailapi-trailapi.p.mashape.com/", 
+//     type: 'GET',
+// //parameters that can be changed    
+//     data: {
+// //set limit by me    	
+//     	'limit': 10,
+//     	// 'q[activities_activity_type_name_eq]': null,
+// //set limit by me      	
+//     	'radius': 50,
+// //changed based of var city    	
+//     	'q[city_cont]': "Orlando",
+// //changed based of var state    	
+//     	'q[state_cont]': "Florida"
+// 		}, 
+// // Additional parameters here
+//     datatype: 'json',
+// //success: function(data) { alert(JSON.stringify(data)); },
+//     error: function(err) { alert(err); },
+//     beforeSend: function(xhr) {
+// // Enter here your Mashape key   	
+//     xhr.setRequestHeader("X-Mashape-Authorization", "NQTdn7V99JmshrgWNZDbdFehWFX8p17WiaijsnBkVdo5einCNy");
+//     	}
+// 	})
 
 //End of the window.onload function
 });
