@@ -162,14 +162,9 @@ $(window).on("load", function() {
 	checkBox();
  	$("#submit-button").on("click", function(event) {
     	event.preventDefault();
-    	city = $('#city-input').val();
-    	state = $('#state-input').val();
     	name = $('#name-input').val();
-    	trailFinder(city, state);
-    	$('#city').text(city.toUpperCase() + " ");
-    	$('#state').text(state.toUpperCase()); 
-    	$('#state-input').val("");
-    	$('#city-input').val("");
+    	// trailFinder(city, state);
+    	$('#test').text(name.toUpperCase());
 //get the search value
   		var searchValue = $("#name-input").val();
 //use geocoder
@@ -204,7 +199,8 @@ $(window).on("load", function() {
 				}
 //End of the geocode/marker function	  			
 	  	});
-//End of the submit-button function	  	
+//End of the submit-button function	  
+    $('#name-input').val("");	
 	});
 
 // --------------------------------------------------------
@@ -232,7 +228,6 @@ console.log(window.location.href);
 		};
 	});
 
-// --------------------------------------------
 
 //initial Calling a jQuery ajax function to pull information 
 $.ajax({

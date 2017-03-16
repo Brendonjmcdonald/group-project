@@ -76,6 +76,9 @@ a	{
 	color: #ffffff;
 }
 
+#name-input {
+	width: 100%
+}
 
 form {
 	font-size: 14px;
