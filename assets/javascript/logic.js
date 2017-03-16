@@ -1,4 +1,3 @@
-var place = "";
 var filterList = [" hiking ", " camping ", " caving ", " trail running ", " snow sports ", " horseback riding ", " atv ", " water sports "];
 
 //Variables that can change for google maps parameters
@@ -6,11 +5,21 @@ var lat = 28.741898;
 var lng = -81.305587;
 var zoom = 12;
 
+//assuming that when the checkbox is selected, then each variable will before true and be added to the search
+var hiking = false;
+var camping = false;
+var caving = false;
+var trailrunning = false;
+var snowsports = false;
+var horsebackriding = false;
+var atv = false;
+var watersports = false;
+
 //functions that will generate the list of buttons for some of the variable selections
 function checkBox() {
 	for (i = 0; i < filterList.length; i++) {
 		var button = $('<input type="checkbox">');
-		button.attr("data-value", filterList[i]);
+		button.attr("data-value", filterList[i].trim());
 		button.attr('id', 'filterList' + i);
 		$('#filter-input').append(button, filterList[i] + "<br />");
 	}
@@ -52,6 +61,7 @@ function initMap() {
 		position: google.maps.ControlPosition.LEFT_TOP
 		}
 	});
+		
 // creates a marker
 	var marker = new google.maps.Marker({
 		position: {lat: 28.741898, lng:-81.305587},
@@ -98,44 +108,30 @@ console.log(window.location.href);
 		};
 	});
 
+// --------------------------------------------
 
-
-
-
-
-
-		$.ajax({
-    url: "https://trailapi-trailapi.p.mashape.com/", // The URL to the API. You can get this by clicking on "Show CURL example" from an API profile
-    type: 'GET', // The HTTP Method
+//Calling a jQuery ajax function to pull information 
+$.ajax({
+    url: "https://trailapi-trailapi.p.mashape.com/", 
+    type: 'GET',
     data: {
-    	// 'lat':
-    	// 'lon':
-    	'limit': '5',
-    	// 'q[activities_activity_type_name_eq]':
-    	// 'radius': '50',
-
-    }, // Additional parameters here
+    	'lat': lat,
+    	'lon': lng,
+    	'limit': 10,
+    	'q[activities_activity_type_name_eq]': filterList[(Math.floor(Math.random() * filterList.length) + 1)].trim().toString(),
+    	'radius': 50
+		}, 
+// Additional parameters here
     datatype: 'json',
-    //success: function(data) { alert(JSON.stringify(data)); },
+//success: function(data) { alert(JSON.stringify(data)); },
     error: function(err) { alert(err); },
     beforeSend: function(xhr) {
-    xhr.setRequestHeader("X-Mashape-Authorization", "NQTdn7V99JmshrgWNZDbdFehWFX8p17WiaijsnBkVdo5einCNy"); // Enter here your Mashape key
-    }
-}).done(function(response){
-
-	 for (var i=0; i<5; i++){
-
-// console.log(response);
-console.log(response.places[i]);
-// console.log(response.places[i].city);
-// console.log(response.places[i].name);
-// console.log(response.places[i].lat);
-// console.log(response.places[i].lon);
-console.log(response.places[i].activities[0]);
-
-}
-
-})
+// Enter here your Mashape key   	
+    xhr.setRequestHeader("X-Mashape-Authorization", "NQTdn7V99JmshrgWNZDbdFehWFX8p17WiaijsnBkVdo5einCNy");
+    	}
+	})
+	.done(function(response){
+	})
 		
 
 //End of the window.ready function
