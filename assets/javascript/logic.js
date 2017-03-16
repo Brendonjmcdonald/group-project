@@ -134,6 +134,10 @@ $(window).on("load", function() {
     	city = $('#city-input').val();
     	state = $('#state-input').val();
     	trailFinder(city, state);
+    	$('#city').text(city.toUpperCase() + ", ");
+    	$('#state').text(state.toUpperCase());
+    	$('#state-input').val("");
+    	$('#city-input').val("");
 	});
 
 //console log gives me 50, because its giving the direct link count til it reaches that string , so it is basically 50 > -1    	

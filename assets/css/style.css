@@ -20,6 +20,10 @@ input{
  hr {
  	border-color: white;
  }
+
+ p {
+ 	margin:5px;
+ }
 /*Main row of the page */ 
 .row { 
 	width: 100%;
