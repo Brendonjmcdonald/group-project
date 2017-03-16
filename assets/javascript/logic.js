@@ -69,20 +69,41 @@ function initMap() {
 }
 
 //When the page loads, this will run
-$(document).ready(function() {
+$(window).ready(function() {
 	checkBox();
  	$("#submit-button").on("click", function(event) {
-    event.preventDefault();
+    	event.preventDefault();
 
 	});
+
+//if else statements to disable the buttons if the user is currently on that page	
     $("#homepage").on("click", function(event) {
-    event.preventDefault();
-	window.location.href = 'index.html';
-	});
+
+//console log gives me -1, because no search was used, so it is basically -1 > -1    	
+console.log(window.location.href.indexOf('aboutus.html'));
+		if (window.location.href.indexOf('index.html') > -1) {
+			$(this).prop('disabled', true);
+			event.preventDefault();
+			}
+		else {
+			window.location.href = 'index.html';
+		};
+	});	
     $("#aboutUs").on("click", function(event) {
-    event.preventDefault();
-	window.location.href = 'aboutus.html'
+		if (window.location.href.indexOf('aboutus.html') > -1) {
+			$(this).prop('disabled', true);
+			event.preventDefault();
+			}
+		else {
+			window.location.href = 'aboutus.html';
+		};
 	});
+
+
+
+
+
+
 
 		$.ajax({
     url: "https://trailapi-trailapi.p.mashape.com/", // The URL to the API. You can get this by clicking on "Show CURL example" from an API profile
@@ -118,6 +139,6 @@ console.log(response.places[i].activities[0]);
 })
 		
 
-
+//End of the window.ready function
 });
 
