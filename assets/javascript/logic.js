@@ -61,6 +61,7 @@ function checkBox() {
 // End of the checkbox function
 };
 
+
 //this is the function that runs at the end of the googleAPI script 
 function initMap() {
 //where the map will be displayed	
@@ -94,8 +95,9 @@ function initMap() {
 		position: google.maps.ControlPosition.LEFT_TOP
 		}	
 		});
-		
+
 		autoSearch = new google.maps.places.Autocomplete(document.getElementById('name-input'));
+		geocoder = new google.maps.Geocoder();
 //End of the initMap function			
 }
 
@@ -141,23 +143,23 @@ function trailFinder (city, state) {
 //End of trailFinder function
 }
 
-function markerGenerator() {		
-// creates a marker
-	var marker = new google.maps.Marker({
-		position: {lat: 28.741898, lng:-81.305587},
-		map: map,
-		clickableIcons: true,
-	});
-// creates the information to be displayed when clicked
-	var infowindow = new google.maps.InfoWindow({
-		content: '<p id="Trail1">Trail Name ' + 'Activity' + marker.getPosition() + '</p>',
-	});
+// function markerGenerator() {		
+// // creates a marker
+// 	var marker = new google.maps.Marker({
+// 		position: {lat: 28.741898, lng:-81.305587},
+// 		map: map,
+// 		clickableIcons: true,
+// 	});
+// // creates the information to be displayed when clicked
+// 	var infowindow = new google.maps.InfoWindow({
+// 		content: '<p id="Trail1">Trail Name ' + 'Activity' + marker.getPosition() + '</p>',
+// 	});
 
-	google.maps.event.addListener(marker, 'click', function(){
-		infowindow.open(map, marker);
-	});
-//End of the markerGenerator function
-}
+// 	google.maps.event.addListener(marker, 'click', function(){
+// 		infowindow.open(map, marker);
+// 	});
+// //End of the markerGenerator function
+// }
 
 //When the page loads, this will run
 $(window).on("load", function() {
@@ -172,6 +174,30 @@ $(window).on("load", function() {
     	$('#state').text(state.toUpperCase()); 
     	$('#state-input').val("");
     	$('#city-input').val("");
+//get the search value
+  		var searchValue = $("#name-input").val();
+  		//use geocoder
+  		//the first parameter is an object with 'address', which is used if you
+  		//want to get coordinates from an address
+  		//to get an address from coordinates, use 
+  		//{'location': {'lat': 28.5383355, 'lng': -81.37923649999999}}
+  		//the second parameter is a callback function
+  		geocoder.geocode({'address': searchValue}, function(results, status) {
+
+	  		if(status === 'OK') {
+
+	  			//results is going to be the address, but it is 
+	  			//going to give you a multiple choices in an array
+	  			//the first is probably the most accurate, so results[0] is your best bet.
+	  			//geometry.location is where you need to go to get
+	  			//the latitude and longitude, using the lat() and lng() functions
+	  			var geometry = results[0].geometry.location;
+	  			latitude = geometry.lat();
+	  			longitude = geometry.lng();
+	  			console.log('lat: ' + latitude + ', lng: ' + longitude);
+	  			}
+	  	});
+//End of the submit-button function	  	
 	});
 
 //console log gives me 50, because its giving the direct link count til it reaches that string , so it is basically 50 > -1    	
