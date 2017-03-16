@@ -8,7 +8,8 @@ body {
 	background: rgba(0, 0, 0, .8);
 	color: #ffffff;
 }
-
+/*
+buttons on the nav bar*/
 div.p-2.nav-item.nav-link {
 	background: rgba(0, 0, 0, .8);
 }
@@ -19,6 +20,7 @@ input{
 
 /*Main row of the page */ 
 .row { 
+	width: 100%;
 	box-sizing: border-box;
 	background: rgba(0, 0, 0, .5);
 	height: 600px;
@@ -37,10 +39,11 @@ input{
 	border: 1px solid #ffffff;
 	box-sizing: border-box;
 	padding: 15px;
-	padding-left: 25px;
 }
 
 .footer {
+	box-sizing: border-box;
+	padding-top: 10px;
 	position: absolute;
 	bottom: 0;
 	left: 0;
@@ -50,7 +53,10 @@ input{
 	background: rgba(0, 0, 0, .8);
 	text-align: center;
 	color: #ffffff;
+}
 
+.footer p{ 
+	margin: 0px;
 }
 
 /*Title font related*/ 
@@ -84,14 +90,15 @@ span {
  	-moz-box-shadow: -1px 1px 4px 6px black;
  	box-shadow: -1px 1px 4px 6px black; */
 }
+
 #input-display{
 	padding-left: 2px;
 	padding-right: 10px;
 	-webkit-box-shadow: -1px 1px 2px 4px #498104;
- 	-moz-box-shadow: -1px 1px 2px 4px #498104;
- 	box-shadow: -1px 1px 2px 4px #498104; 
- 	
+ 	-moz-box-shadow: -1px 1px 2px 4px #498104;	
+}
 
-	
-	
+/*temperary fix for marker text*/
+#Trail1 {
+	color: black;
 }
