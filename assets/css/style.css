@@ -65,6 +65,11 @@ input{
 	font-weight: bolder;
 }
 
+a	{
+	color: #ffffff;
+}
+
+
 form {
 	font-size: 18px;
 	font-weight: bold;

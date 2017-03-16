@@ -76,11 +76,10 @@ $(window).ready(function() {
 
 	});
 
-//if else statements to disable the buttons if the user is currently on that page	
+//console log gives me 50, because its giving the direct link count til it reaches that string , so it is basically 50 > -1    	
+console.log(window.location.href);
+//if else statements to disable the buttons if the user is currently on that page	   
     $("#homepage").on("click", function(event) {
-
-//console log gives me -1, because no search was used, so it is basically -1 > -1    	
-console.log(window.location.href.indexOf('aboutus.html'));
 		if (window.location.href.indexOf('index.html') > -1) {
 			$(this).prop('disabled', true);
 			event.preventDefault();
