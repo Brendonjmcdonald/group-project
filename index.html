@@ -39,6 +39,8 @@
           <span id="filter-input"></span>
         </div><br /><hr />
 <!--Where the city and state info will be inputted -->
+      <p>Trail Name:</p>   
+      <input id="name-input" type="textbox" value="Enter Name" onfocus="if (this.value=='Enter Name') this.value='';"/><br />
       <p>City:</p>   
       <input id="city-input" type="textbox" value="Enter City" onfocus="if (this.value=='Enter City') this.value='';"/><br />
       <p>State:</p>   
@@ -76,6 +78,6 @@
 <script src="assets/javascript/logic.js" type="text/javascript"></script>
 
 <!--(look up JSONP this is based on a script with a callback function) This is the script needed to run the google api with key attached -->
-<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBgpkx2l_pbdRWtr5TvjIiU02DbgYaAO7Y&callback=initMap" type="text/javascript"></script>
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBgpkx2l_pbdRWtr5TvjIiU02DbgYaAO7Y&libraries=places&callback=initMap" type="text/javascript"></script>
 </body>
 </html>

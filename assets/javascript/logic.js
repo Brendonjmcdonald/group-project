@@ -8,6 +8,7 @@ var zoom = 12;
 //variables to change the location of google maps (state abbreviations work, also doesn't matter upper or lowercase)
 var city = "";
 var state = "";
+var name = "";
 
 //assuming that when the checkbox is selected, then each variable will before true and be added to the search
 var hiking = false;
@@ -161,9 +162,10 @@ $(window).on("load", function() {
     	event.preventDefault();
     	city = $('#city-input').val();
     	state = $('#state-input').val();
+    	name = $('#name-input').val();
     	trailFinder(city, state);
     	$('#city').text(city.toUpperCase() + ", ");
-    	$('#state').text(state.toUpperCase());
+    	$('#state').text(state.toUpperCase()); 
     	$('#state-input').val("");
     	$('#city-input').val("");
 	});
