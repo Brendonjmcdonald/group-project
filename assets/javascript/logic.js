@@ -10,8 +10,8 @@ var city = "";
 var state = "";
 var name = "";
 var markers = [];
-var latitude = 0;
-var longitude = 0;
+// var latitude = 0;
+// var longitude = 0;
 
 //assuming that when the checkbox is selected, then each variable will before true and be added to the search
 var hiking = false;
@@ -107,7 +107,7 @@ function initMap() {
 // ------------------------------------------------------
 
 //Function to log in city and state parameters and display results via trailAPI
-function trailFinder (city, state, latitude, longitude) {
+function trailFinder (latitude, longitude) {
 	console.log(city);
   	console.log(state);
   	console.log(latitude);
@@ -128,7 +128,7 @@ function trailFinder (city, state, latitude, longitude) {
 //changed based on var latitude    	
     	'lat': latitude,
 //changed based on var longitude    	
-    	'lon': longitude,
+    	'lon': longitude
 		}, 
 // Additional parameters here
     datatype: 'json',
@@ -142,11 +142,10 @@ function trailFinder (city, state, latitude, longitude) {
 
 .done(function(response) {
 
-	for (i=0; i<1; i++) {
+	for (i=0; i<3; i++) {
 
 //object is places	 	
 	console.log(response.places[i]);
-	console.log(this);
 	}
 	});
 
@@ -163,7 +162,6 @@ $(window).on("load", function() {
  	$("#submit-button").on("click", function(event) {
     	event.preventDefault();
     	name = $('#name-input').val();
-    	// trailFinder(city, state);
     	$('#test').text(name.toUpperCase());
 //get the search value
   		var searchValue = $("#name-input").val();
@@ -183,6 +181,7 @@ $(window).on("load", function() {
 	  			var geometry = results[0].geometry.location;
 	  			latitude = geometry.lat();
 	  			longitude = geometry.lng();
+	  			trailFinder(latitude, longitude);
 	  			console.log('latitude: ' + latitude);
 	  			console.log('longitude: ' + longitude);
 //set a marker at location
