@@ -19,6 +19,36 @@ var horsebackriding = false;
 var atv = false;
 var watersports = false;
 
+// Initialize Firebase
+var config = {
+    apiKey: "AIzaSyD5NXLlTfIfpROe5y5e5-k-MG3L4PKVAeY",
+    authDomain: "trail-tracker-89184.firebaseapp.com",
+    databaseURL: "https://trail-tracker-89184.firebaseio.com",
+    storageBucket: "trail-tracker-89184.appspot.com",
+    messagingSenderId: "47518348432"
+  };
+  firebase.initializeApp(config);
+
+//variables for connections to firebase
+var database = firebase.database();
+var connectionsRef = database.ref("/connections");
+var connectedRef = database.ref(".info/connected");
+
+//used to check if anyone is online
+connectedRef.on("value", function(snap) {
+	if(snap.val()) {
+//when someone is online they are pushed to the connects list		
+		var con = connectionsRef.push(true);
+//when someone leaves, they are removed from the list		
+		con.onDisconnect().remove();
+	}
+});
+
+//displays the number of active users
+connectionsRef.on("value", function(snap) {
+	$("#activeUsers").text(" : " + snap.numChildren() + " user(s) following the trail");
+});
+
 //functions that will generate the list of buttons for some of the variable selections
 function checkBox() {
 	for (i = 0; i < filterList.length; i++) {
@@ -29,8 +59,6 @@ function checkBox() {
 	}
 // End of the checkbox function
 };
-
-
 
 //this is the function that runs at the end of the googleAPI script 
 function initMap() {
@@ -192,3 +220,4 @@ $.ajax({
 
 //End of the window.onload function
 });
+

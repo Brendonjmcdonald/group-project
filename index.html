@@ -9,15 +9,17 @@
     <script src="https://code.jquery.com/jquery-3.1.1.slim.min.js" integrity="sha384-A7FZj7v+d/sdmMqp/nOQwliLvUsJfDHW+k9Omg/a/EheAdgtzNs3hpfag6Ed950n" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/tether/1.4.0/js/tether.min.js" integrity="sha384-DztdAPBWPRXSA/3eYEEUWrWCy7G5KFbe8fFjk5JAIxUYHKkDx6Qin1DkWx51bBrb" crossorigin="anonymous"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/js/bootstrap.min.js" integrity="sha384-vBWWzlZJ8ea9aCX4pEW3rVHjgjt7zpkNpZk+02D9phzyeVkE+jo0ieGizqPLForn" crossorigin="anonymous"></script>
-    <!--Personal CSS/IMAGES folders -->
+<!--Personal CSS/IMAGES folders -->
     <link href="assets/css/style.css" rel="stylesheet" type="text/css">
     <link href="assets/images">
+<!--Firebase Script -->    
+    <script src="https://www.gstatic.com/firebasejs/3.7.2/firebase.js"></script>
 </head>
 
 <body>
 <!--Navigation Bar-->
 <div class="d-flex justify-content-end">
-  <div class="mr-auto p-2" id="title">Following <a target="_blank" href="https://github.com/rtaveras824" onclick="this.href">Reuben's</a> Trail</div>
+  <div class="mr-auto p-2" id="title">Following <a target="_blank" href="https://github.com/rtaveras824" onclick="this.href">Reuben's</a> Trail<span id="activeUsers"></span></div>
   <div type="button" id="homepage" class="p-2 nav-item nav-link" href="index.html">
   Homepage</div>
   <div type="button" id="aboutUs" class="p-2 nav-item nav-link" href="aboutus.html">
