@@ -1,4 +1,4 @@
-var filterList = [" hiking ", " camping ", " caving ", " trail running ", " snow sports ", " horseback riding ", " atv ", " water sports "];
+// var filterList = [" hiking ", " camping ", " caving ", " trail running ", " snow sports ", " horseback riding ", " mountain biking ", " water sports "];
 
 //Set variables for windows loading page (This is Lake Mary, Fl)
 var lat = 28.741898;
@@ -6,8 +6,8 @@ var lng = -81.305587;
 var zoom = 10;
 var activities = "";
 
-//variables to change the location of google maps
-// var markers = [];
+// variables to change the location of google maps
+var markers = [];
 // var latitude = 0;
 // var longitude = 0;
 
@@ -51,16 +51,16 @@ connectionsRef.on("value", function(snap) {
 	$("#activeUsers").text(" : " + snap.numChildren() + " user(s) following the trail");
 });
 
-//functions that will generate the list of buttons for some of the variable selections
-function checkBox() {
-	for (i = 0; i < filterList.length; i++) {
-		var button = $('<input type="checkbox">');
-		button.attr("data-value", filterList[i].trim());
-		button.attr('id', 'filterList' + i);
-		$('#filter-input').append(button, filterList[i] + "<br />");
-	}
-// End of the checkbox function
-};
+// //functions that will generate the list of buttons for some of the variable selections
+// function checkBox() {
+// 	for (i = 0; i < filterList.length; i++) {
+// 		var button = $('<input type="checkbox">');
+// 		button.attr("data-value", filterList[i].trim());
+// 		button.attr('id', 'filterList' + i);
+// 		$('#filter-input').append(button, filterList[i] + "<br />");
+// 	}
+// // End of the checkbox function
+// };
 
 
 //this is the function that runs at the end of the googleAPI script 
@@ -141,10 +141,24 @@ function trailFinder (latitude, longitude) {
 //Checking to see the places that will be displayed via console.log 	
 	console.log(response.places[i]);
 //Creating a marker at each place location
-	 marker = new google.maps.Marker({
+	markers[i] = new google.maps.Marker({
 		position: {'lat': response.places[i].lat, 'lng': response.places[i].lon},
 		map: map
 				});
+
+	  var infoWindow = new google.maps.InfoWindow({
+		content: '<div class="trail">' + response.places[i].name + " " +  '<br /><br />' + response.places[i].activities[0].activity_type_name + '</div>'
+        });
+
+        // google.maps.event.addListener(markers[i], 'click', function() {
+        //   infowindow.open(map, markers[i]);
+        // });
+
+        // Adds click listener to each individual marker and then opens the info window
+        markers[i].addListener('click', function(){
+        	infoWindow.open(map, this);
+        });
+// --------------------------------------
 //End of the for loop
 	}
 
@@ -156,7 +170,7 @@ function trailFinder (latitude, longitude) {
 
 //When the page loads, this will run
 $(window).on("load", function() {
-	checkBox();
+	// checkBox();
  	$("#submit-button").on("click", function(event) {
     	event.preventDefault();
     	name = $('#name-input').val();
@@ -187,7 +201,8 @@ $(window).on("load", function() {
 			});
 //center the map to the marker position
 			marker.addListener('click', function() {
-				//this refers to the marker that is clicked
+//this refers to the marker that is clicked
+			infoWindow.open(map, marker);
 			map.setCenter(this.getPosition());
 			});
 //center the map to the marker position
@@ -221,32 +236,6 @@ console.log(window.location.href);
 			window.location.href = 'aboutus.html';
 		};
 	});
-
-// //initial Calling a jQuery ajax function to pull information 
-// $.ajax({
-//     url: "https://trailapi-trailapi.p.mashape.com/", 
-//     type: 'GET',
-// //parameters that can be changed    
-//     data: {
-// //set limit by me    	
-//     	'limit': 10,
-//     	// 'q[activities_activity_type_name_eq]': null,
-// //set limit by me      	
-//     	'radius': 50,
-// //changed based of var city    	
-//     	'q[city_cont]': "Orlando",
-// //changed based of var state    	
-//     	'q[state_cont]': "Florida"
-// 		}, 
-// // Additional parameters here
-//     datatype: 'json',
-// //success: function(data) { alert(JSON.stringify(data)); },
-//     error: function(err) { alert(err); },
-//     beforeSend: function(xhr) {
-// // Enter here your Mashape key   	
-//     xhr.setRequestHeader("X-Mashape-Authorization", "NQTdn7V99JmshrgWNZDbdFehWFX8p17WiaijsnBkVdo5einCNy");
-//     	}
-// 	})
 
 //End of the window.onload function
 });
