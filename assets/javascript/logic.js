@@ -217,22 +217,23 @@ $(window).on("load", function() {
   			latitude = geometry.lat();
   			longitude = geometry.lng();
   			trailFinder(latitude, longitude);
-//set a marker at location
+//Set a marker at location
   			var marker = new google.maps.Marker({
 				position: {'lat': latitude, 'lng': longitude},
 				map: map
 			});
+//information for startinfo marker infoWindow			
 			var startInfo = new google.maps.InfoWindow({ 		
 			content: '<div class="trail">' + name + "<br />lat:  " + latitude + "<br />lat:  " + longitude +'</div>'
         });
-//center the map to the marker position
+//center the map to the marker position and displays info marker
 			marker.addListener('click', function() {
-//this refers to the marker that is clicked
 			startInfo.open(map, marker);
 			map.setCenter(this.getPosition());
 			});
 //center the map to the marker position
 			map.setCenter(marker.getPosition());
+//map event when clicked closes start info marker			
 			google.maps.event.addListener(map, "click", function(event) {
     		startInfo.close();
     		});	
