@@ -8,18 +8,20 @@ var activities = "";
 
 // variables to change the location of google maps
 var markers = [];
+var nameList = [];
+var descriptionList = [];
 // var latitude = 0;
 // var longitude = 0;
 
 //assuming that when the checkbox is selected, then each variable will before true and be added to the search
-var hiking = false;
-var camping = false;
-var caving = false;
-var trailrunning = false;
-var snowsports = false;
-var horsebackriding = false;
-var atv = false;
-var watersports = false;
+// var hiking = false;
+// var camping = false;
+// var caving = false;
+// var trailrunning = false;
+// var snowsports = false;
+// var horsebackriding = false;
+// var atv = false;
+// var watersports = false;
 
 // Initialize Firebase
 var config = {
@@ -138,27 +140,48 @@ function trailFinder (latitude, longitude) {
 	console.log('google longitude: ' + longitude);
 //Creating a for loop to generate a marker for 10 places, "places" is the object when using trailAPI website	
 	for (i=0; i<10; i++) {
-//Checking to see the places that will be displayed via console.log 	
+//Checking to see the places that will be displayed via console.log, yes 	
 	console.log(response.places[i]);
+
+//Creating a name and description variable for the trailAPI data and pushing to two empty arrays	
+	var name = response.places[i].name;
+	var description = response.places[i].description;
+  		nameList.push(response.places[i].name);
+  		descriptionList.push(response.places[i].description);
+
+//Checking to see if they get pushed to empty array, they do!
+  	console.log(nameList);
+	console.log(descriptionList);
+
+//Creates a infomarker with data from the empty array name and description
+//Then also generates the marker with the trailAPI lat and lon provided
+//Left the function inside the TrailAPI for use of variable scope
+//PREVIOUS PROBLEM FYI: ALL MARKERS WERE SETTING TO INFO FROM THE LAST MARKER, 
+//IT IS BECAUSE THE INFORMATION WAS NOT BEING STORED ANYWHERE, SO WE STORED IT AND REQUESTED IT[i] EVERYTIME THE FUNCTION RAN 	
+function addInfomarker() {	
+ 	var infoWindow = new google.maps.InfoWindow({ 		
+		content: '<div class="trail">' + nameList[i] + " " +  '<br /><br />' + descriptionList[i] + '</div>'
+        });
+
 //Creating a marker at each place location
 	markers[i] = new google.maps.Marker({
+//lat and lng are provided by the trailAPI looking for nearby locations		
 		position: {'lat': response.places[i].lat, 'lng': response.places[i].lon},
 		map: map
 				});
-
-	  var infoWindow = new google.maps.InfoWindow({
-		content: '<div class="trail">' + response.places[i].name + " " +  '<br /><br />' + response.places[i].activities[0].activity_type_name + '</div>'
-        });
-
-        // google.maps.event.addListener(markers[i], 'click', function() {
-        //   infowindow.open(map, markers[i]);
-        // });
-
-        // Adds click listener to each individual marker and then opens the info window
+// Adds click listener to each individual marker and then opens the info window and centers
         markers[i].addListener('click', function(){
         	infoWindow.open(map, this);
+			map.setCenter(this.getPosition());
         });
-// --------------------------------------
+//Onclick that closes infowindow if user clicks map        
+google.maps.event.addListener(map, "click", function(event) {
+    infoWindow.close();
+});
+    }
+//Runs the addInfo function inside the .done response     
+addInfomarker();       
+
 //End of the for loop
 	}
 
