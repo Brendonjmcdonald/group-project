@@ -1,7 +1,56 @@
-body {
+#page2 {
 	background-image: url("../../assets/images/picnic.jpg");
 	background-size: auto;
 }
+/*page1{
+	background-size: cover;
+	z-index: -99;
+		* {
+	  margin: 0; padding: 0;
+
+	}
+*/
+	#container {
+		
+	 /* overflow: hidden;*/
+	  height: 400px;
+	  background: #edeae8;
+	  position: absolute;
+	  z-index: -99;
+	}
+
+	video {
+	  position: fixed;
+	  background-size: cover;
+	  left: 0;
+	  right: 0;
+	  bottom: 0;
+	  
+	  
+	  /* Horizontally center*/
+	 /* left: 50%;*/
+	 /* transform: translateX(-50%);*/
+	  
+	  /* Could do vertial centering too, depending upon your requirements:
+	  top: 50%;
+	  transform: translate(-50%, -50%);
+	  
+	  But in practise I noticed just `top: 0;` fulfills our expectations pretty well (obviously will vary from video to video)
+	  */
+	  top: 0;
+	}
+
+	#overlay {
+	  position: absolute;
+	  top: 0; right: 0; left: 0; bottom: 0;
+	  z-index: -99;
+	  background: rgba(0,0,0,0.5);
+	}
+
+
+
+}
+
 
 /*Navigation bar */ 
 .d-flex.justify-content-end {
@@ -12,6 +61,14 @@ body {
 buttons on the nav bar*/
 div.p-2.nav-item.nav-link {
 	background: rgba(0, 0, 0, .8);
+}
+#title-p{
+	font-family: Copperplate, "Copperplate Gothic Light", fantasy;
+	font-size: 30px;
+	color: white;
+	-webkit-text-stroke-width: 1px;
+   	-webkit-text-stroke-color: black;
+   	border-bottom: 5px solid black;
 }
 
 input{
@@ -24,6 +81,36 @@ input{
  p {
  	margin:5px;
  }
+ #event-input{
+	padding: 3px;
+	text-shadow:0px 1px 0px black !important;
+}
+#date-input{
+	padding: 3px;
+	text-shadow:0px 1px 0px black !important;
+}
+#time-input{
+	padding: 3px;
+	text-shadow:0px 1px 0px black !important;
+}
+.header{
+	margin: auto 0;
+	left: 0;
+	top: 30px;
+	right: 0;
+	
+
+}
+.header h1{
+	text-align: center;
+	font-family: Copperplate, "Copperplate Gothic Light", fantasy;
+	font-size: 100px;
+	-webkit-text-stroke-width: 3px;
+   	-webkit-text-stroke-color: black;
+   	color: white;
+   	letter-spacing: 15px;
+
+}
 /*Main row of the page */ 
 .row { 
 	width: 100%;
@@ -88,6 +175,42 @@ form {
 span {
 	font-weight: normal;
 	font-size: 1rem;
+}
+#entry-button{
+	font-family: Copperplate, "Copperplate Gothic Light", fantasy;
+	color: white;
+	font-size: 20px;
+	text-align: center;
+	margin: auto 0;
+	height: 50px;
+	width: 200px;
+	position: absolute;
+	left: 195px;
+	top: 40px;
+	position: center;
+	background: rgba(0, 0, 0, .4);
+
+
+}
+.jumbotron {
+	border-bottom: 5px solid black;
+	border-top: 5px solid black;
+	 
+	background-image-size: auto;
+	margin: auto 0;
+	position: absolute;
+	transform: translate(55%,110%);
+	box-sizing: border-box;
+	background: rgba(0, 0, 0, .05);
+	min-height: 50px;
+	max-height: 200px;
+	min-width: 60px;
+	max-width: 600px;
+	color: #ffffff;
+	
+ 	padding-left: 10px;
+	padding-right: 2px;
+
 }
 
 /*.video{
