@@ -222,15 +222,22 @@ $(window).on("load", function() {
 				position: {'lat': latitude, 'lng': longitude},
 				map: map
 			});
+			var startInfo = new google.maps.InfoWindow({ 		
+			content: '<div class="trail">' + name + "<br />lat:  " + latitude + "<br />lat:  " + longitude +'</div>'
+        });
 //center the map to the marker position
 			marker.addListener('click', function() {
 //this refers to the marker that is clicked
-			infoWindow.open(map, marker);
+			startInfo.open(map, marker);
 			map.setCenter(this.getPosition());
 			});
 //center the map to the marker position
 			map.setCenter(marker.getPosition());
+			google.maps.event.addListener(map, "click", function(event) {
+    		startInfo.close();
+    		});	
 			}
+
 //End of the geocode/marker function	  			
 	  	});
 //End of the submit-button function	  
