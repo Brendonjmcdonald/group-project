@@ -1,0 +1,48 @@
+<!DOCTYPE HTML>
+<html lang="en">
+<head>
+<meta  charset="UTF-8">
+  <title>Trail Finder</title>
+<!--Using Bootscrap 4.0 alpha -->   
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css" integrity="sha384-rwoIResjU2yc3z8GV/NPeZWAv56rSmLldC3R/AZzGRnGxQQKnKkoFVhFQhNUwEyJ" crossorigin="anonymous">
+<!--Using jQuery 3.1.1 came with bootstrap -->   
+    <script src="https://code.jquery.com/jquery-3.1.1.slim.min.js" integrity="sha384-A7FZj7v+d/sdmMqp/nOQwliLvUsJfDHW+k9Omg/a/EheAdgtzNs3hpfag6Ed950n" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/tether/1.4.0/js/tether.min.js" integrity="sha384-DztdAPBWPRXSA/3eYEEUWrWCy7G5KFbe8fFjk5JAIxUYHKkDx6Qin1DkWx51bBrb" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/js/bootstrap.min.js" integrity="sha384-vBWWzlZJ8ea9aCX4pEW3rVHjgjt7zpkNpZk+02D9phzyeVkE+jo0ieGizqPLForn" crossorigin="anonymous"></script>
+<!--Personal CSS/IMAGES folders -->
+    <link href="assets/css/style.css" rel="stylesheet" type="text/css">
+    <link href="assets/images">
+<!--Firebase Script -->    
+    <script src="https://www.gstatic.com/firebasejs/3.7.2/firebase.js"></script>
+</head>
+<!-- body ID for page one css being separated-->
+<body id="page1">
+
+<!-- The video background -->
+<div id="container">
+  <video autoplay muted loop>
+    <source src="assets/images/MotherNature-TimeLapse2015.mp4" type="video/mp4">
+  </video>
+  <div id="overlay"></div>
+
+  <div class = "header col-lg-12">
+    <h1>Trail Finder</h1>
+  </div>
+<!--Where the information will be inputted -->
+  <div class="jumbotron col-sm-4">
+    
+
+
+<!--Button to change to main page -->          
+    <button id="entry-button" onclick="location.href='index.html';">Find Your Trail</button>  
+  </div>
+  <div class = "filler col-sm-4">
+  </div>
+
+</div>
+
+
+
+<script src="assets/javascript/logic.js" type="text/javascript"></script>
+</body>
+</html>

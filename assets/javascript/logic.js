@@ -8,18 +8,18 @@ var activities = "";
 
 // variables to change the location of google maps
 var markers = [];
-// var latitude = 0;
-// var longitude = 0;
+var nameList = [];
+var descriptionList = [];
 
 //assuming that when the checkbox is selected, then each variable will before true and be added to the search
-var hiking = false;
-var camping = false;
-var caving = false;
-var trailrunning = false;
-var snowsports = false;
-var horsebackriding = false;
-var atv = false;
-var watersports = false;
+// var hiking = false;
+// var camping = false;
+// var caving = false;
+// var trailrunning = false;
+// var snowsports = false;
+// var horsebackriding = false;
+// var atv = false;
+// var watersports = false;
 
 // Initialize Firebase
 var config = {
@@ -138,30 +138,54 @@ function trailFinder (latitude, longitude) {
 	console.log('google longitude: ' + longitude);
 //Creating a for loop to generate a marker for 10 places, "places" is the object when using trailAPI website	
 	for (i=0; i<10; i++) {
-//Checking to see the places that will be displayed via console.log 	
+//Checking to see the places that will be displayed via console.log, yes 	
 	console.log(response.places[i]);
+
+//Creating a name and description variable for the trailAPI data and pushing to two empty arrays	
+	var name = response.places[i].name;
+	var description = response.places[i].description;
+  		nameList.push(response.places[i].name);
+  	if (response.places[i].description === null) {
+  		 descriptionList.push("Description not provided by TrailAPI")}
+  	else { descriptionList.push(response.places[i].description);}
+
+//Checking to see if they get pushed to empty array, they do!
+  	console.log(nameList);
+	console.log(descriptionList);
+
+//Creates a infomarker with data from the empty array name and description
+//Then also generates the marker with the trailAPI lat and lon provided
+//Left the function inside the TrailAPI for use of variable scope
+//PREVIOUS PROBLEM FYI: ALL MARKERS WERE SETTING TO INFO FROM THE LAST MARKER, 
+//IT IS BECAUSE THE INFORMATION WAS NOT BEING STORED ANYWHERE, SO WE STORED IT AND REQUESTED IT[i] EVERYTIME THE FUNCTION RAN 	
+function addInfomarker() {	
+ 	var infoWindow = new google.maps.InfoWindow({ 		
+		content: '<div class="trail">' + nameList[i] + " " +  '<br /><br />' + descriptionList[i] + '</div>'
+        });
+
 //Creating a marker at each place location
 	markers[i] = new google.maps.Marker({
+//lat and lng are provided by the trailAPI looking for nearby locations		
 		position: {'lat': response.places[i].lat, 'lng': response.places[i].lon},
 		map: map
 				});
-
-	  var infoWindow = new google.maps.InfoWindow({
-		content: '<div class="trail">' + response.places[i].name + " " +  '<br /><br />' + response.places[i].activities[0].activity_type_name + '</div>'
-        });
-
-        // google.maps.event.addListener(markers[i], 'click', function() {
-        //   infowindow.open(map, markers[i]);
-        // });
-
-        // Adds click listener to each individual marker and then opens the info window
+// Adds click listener to each individual marker and then opens the info window and centers
         markers[i].addListener('click', function(){
         	infoWindow.open(map, this);
+			map.setCenter(this.getPosition());
         });
-// --------------------------------------
+//Onclick that closes infowindow if user clicks map        
+google.maps.event.addListener(map, "click", function(event) {
+    infoWindow.close();
+});
+    }
+//Runs the addInfo function inside the .done response     
+addInfomarker();       
+
 //End of the for loop
 	}
-
+    nameList = [];
+	descriptionList = [];		
 });
 
 //End of trailFinder function
@@ -193,26 +217,38 @@ $(window).on("load", function() {
   			var geometry = results[0].geometry.location;
   			latitude = geometry.lat();
   			longitude = geometry.lng();
+  			
+
+// ----------Below is trail API + Initial Marker info/parameters------------  			
   			trailFinder(latitude, longitude);
-//set a marker at location
+//Set a marker at location
   			var marker = new google.maps.Marker({
 				position: {'lat': latitude, 'lng': longitude},
 				map: map
 			});
-//center the map to the marker position
+//information for startinfo marker infoWindow			
+			var startInfo = new google.maps.InfoWindow({ 		
+			content: '<div class="trail">' + name + "<br />lat:  " + latitude + "<br />lat:  " + longitude +'</div>'
+        });
+//center the map to the marker position and displays info marker
 			marker.addListener('click', function() {
-//this refers to the marker that is clicked
-			infoWindow.open(map, marker);
+			startInfo.open(map, marker);
 			map.setCenter(this.getPosition());
 			});
 //center the map to the marker position
 			map.setCenter(marker.getPosition());
+//map event when clicked closes start info marker			
+			google.maps.event.addListener(map, "click", function(event) {
+    		startInfo.close();
+    		});	
 			}
 //End of the geocode/marker function	  			
 	  	});
-//End of the submit-button function	  
-    $('#name-input').val("");	
+//End of the submit-button function	 
+//Emptying out the input and emptying out the arrays for the next search 
+    $('#name-input').val("");
 	});
+// --------------------------------------------------------
 
 
 //console log gives me 50, because its giving the direct link count til it reaches that string , so it is basically 50 > -1    	
@@ -236,7 +272,62 @@ console.log(window.location.href);
 			window.location.href = 'aboutus.html';
 		};
 	});
-
 //End of the window.onload function
-});
+});	
 
+// --------------Kevins Homepage JS---------------------------
+
+
+	var video = $('video')
+	  , container = $('#container');
+
+	var setVideoDimensions = function () {
+	  // Video's intrinsic dimensions
+	  var w = video.videoWidth
+	    , h = video.videoHeight;
+	  
+	  // Intrinsic Ratio
+	  // Will be more than 1 if W > H and less if W < H
+	  var videoRatio = (w / h).toFixed(2);
+	  
+	  // Get the container's computed styles
+	  //
+	  // Also calculate the min dimensions required (this will be
+	  // the container dimentions)
+	  var containerStyles = window.getComputedStyle(container)
+	    , minW = parseInt( containerStyles.getPropertyValue('width') )
+	    , minH = parseInt( containerStyles.getPropertyValue('height') );
+	  
+	  // What's the min:intrinsic dimensions
+	  //
+	  // The idea is to get which of the container dimension
+	  // has a higher value when compared with the equivalents
+	  // of the video. Imagine a 1200x700 container and
+	  // 1000x500 video. Then in order to find the right balance
+	  // and do minimum scaling, we have to find the dimension
+	  // with higher ratio.
+	  //
+	  // Ex: 1200/1000 = 1.2 and 700/500 = 1.4 - So it is best to
+	  // scale 500 to 700 and then calculate what should be the
+	  // right width. If we scale 1000 to 1200 then the height
+	  // will become 600 proportionately.
+	  var widthRatio = minW / w
+	    , heightRatio = minH / h;
+	  
+	  // Whichever ratio is more, the scaling
+	  // has to be done over that dimension
+	  if (widthRatio > heightRatio) {
+	    var newWidth = minW;
+	    var newHeight = Math.ceil( newWidth / videoRatio );
+	  }
+	  else {
+	    var newHeight = minH;
+	    var newWidth = Math.ceil( newHeight * videoRatio );
+	  }
+	  
+	  video.style.width = newWidth + 'px';
+	  video.style.height = newHeight + 'px';
+	};
+
+	video.addEventListener('loadedmetadata', setVideoDimensions, false);
+	window.addEventListener('resize', setVideoDimensions, false);
