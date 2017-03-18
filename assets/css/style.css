@@ -2,6 +2,16 @@
 	background-image: url("../../assets/images/welcome.jpg");
 	background-size: auto;
 }
+.jumbotron {
+	position:absolute;
+    top: 50%;
+    left: 50%;
+	background: rgba(0, 0, 0, .5);
+	color: #ffffff;
+	text-align: center;
+	margin-top: -100px;
+  	margin-left: -100px;
+}
 
 body {
 	background-image: url("../../assets/images/picnic.jpg");
