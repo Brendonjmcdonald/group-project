@@ -244,7 +244,9 @@ $(window).on("load", function() {
 //End of the geocode/marker function	  			
 	  	});
 //End of the submit-button function	  
-    $('#name-input').val("");	
+    $('#name-input').val("");
+    nameList = [];
+	descriptionList = [];	
 	});
 // --------------------------------------------------------
 
