@@ -104,6 +104,45 @@ function initMap() {
 //End of the initMap function			
 }
 
+
+// ------------------------------
+
+//WEATHERAPI if we have time
+// function getWeather(latitude, longitude) {
+// console.log("weather lat: " + latitude); 
+// console.log("weather lon: " + longitude); 
+//     $.ajax({
+//         url: 'api.openweathermap.org/data/2.5/weather?lat=28.5383355&lon=-81.37923649999999&APPID=3e804d8a1deb4f79effd2bef71680dd7',
+//         type: 'GET',
+//         dataType: 'jsonp',
+//         success: function (data) {
+//             var wrapper = $("#weatherDiv");
+//             wrapper.empty();
+//             wrapper.append("<div class='city'> <p>Place: " + data.name + ", " + data.sys.country + "</p></div>");
+//             wrapper.append(mainWeather.createWeatherWidg(data));
+//         },
+//         error: function() {
+//             alert('Failed!');
+//         }
+
+       
+//     })
+
+//      //Prints result from the weatherapi, receiving as param an object
+//     .done(function(data) {
+//         return  "<div class='pressure'> <p>Temperature: " + (data.main.temp - 273.15).toFixed(2) + " C</p></div>"+
+//                 "<div class='description'> <p>Conditions: " + data.weather[0].main + "</p></div>" +
+//                 "<div class='description'> <p>Description: " + data.weather[0].description + "</p></div>" +
+//                 "<div class='wind'> <p>Wind Speed: " + data.wind.speed + "</p></div>" +
+//                 "<div class='humidity'> <p>Humidity: " + data.main.humidity + "%</p></div>" +
+//                 "<div class='pressure'> <p>Pressure: " + data.main.pressure + " hpa</p></div>";
+//     });
+// }
+// getWeather();
+
+// --------------------------------------------
+
+
 //Function that pushes lat and long parameters and display results via trailAPI markers
 function trailFinder (latitude, longitude) {
 	$.ajax({
@@ -223,6 +262,7 @@ $(window).on("load", function() {
 
 // ----------Below is trail API + Initial Marker info/parameters------------  			
   			trailFinder(latitude, longitude);
+  			getWeather(latitude, longitude);
 //Set a marker at location
   			var marker = new google.maps.Marker({
 				position: {'lat': latitude, 'lng': longitude},
