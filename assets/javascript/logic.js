@@ -1,4 +1,4 @@
-$ heroku buildpacks:set heroku/php
+// $ heroku buildpacks:set heroku/php
 
 // var filterList = [" hiking ", " camping ", " caving ", " trail running ", " snow sports ", " horseback riding ", " mountain biking ", " water sports "];
 
