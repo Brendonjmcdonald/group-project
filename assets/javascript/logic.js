@@ -10,8 +10,6 @@ var activities = "";
 var markers = [];
 var nameList = [];
 var descriptionList = [];
-// var latitude = 0;
-// var longitude = 0;
 
 //assuming that when the checkbox is selected, then each variable will before true and be added to the search
 // var hiking = false;
@@ -147,7 +145,9 @@ function trailFinder (latitude, longitude) {
 	var name = response.places[i].name;
 	var description = response.places[i].description;
   		nameList.push(response.places[i].name);
-  		descriptionList.push(response.places[i].description);
+  	if (response.places[i].description === null) {
+  		 descriptionList.push("Description not provided by TrailAPI")}
+  	else { descriptionList.push(response.places[i].description);}
 
 //Checking to see if they get pushed to empty array, they do!
   	console.log(nameList);
@@ -216,6 +216,9 @@ $(window).on("load", function() {
   			var geometry = results[0].geometry.location;
   			latitude = geometry.lat();
   			longitude = geometry.lng();
+  			
+
+// ----------Below is trail API + Marker info------------  			
   			trailFinder(latitude, longitude);
 //Set a marker at location
   			var marker = new google.maps.Marker({
@@ -238,12 +241,12 @@ $(window).on("load", function() {
     		startInfo.close();
     		});	
 			}
-
 //End of the geocode/marker function	  			
 	  	});
 //End of the submit-button function	  
     $('#name-input').val("");	
 	});
+// --------------------------------------------------------
 
 
 //console log gives me 50, because its giving the direct link count til it reaches that string , so it is basically 50 > -1    	
