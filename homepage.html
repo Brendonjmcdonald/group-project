@@ -36,7 +36,7 @@
 <!--       <p>Filter Results:</p> -->
 <!--Where the event radio buttons will generate -->       
         <div class ="event">
-          <span id="filter-input"></span>
+          <span id="weatherDiv"></span>
         </div><br /><hr />
 <!--Where the city and state info will be inputted -->
       <p>Search for a trail:</p>   
@@ -73,5 +73,7 @@
 
 <!--(look up JSONP this is based on a script with a callback function) This is the script needed to run the google api with key attached -->
 <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBgpkx2l_pbdRWtr5TvjIiU02DbgYaAO7Y&libraries=places&callback=initMap" type="text/javascript"></script>
+<script src="api.openweathermap.org/data/2.5/weather?callback=getWeather&APPID=3e804d8a1deb4f79effd2bef71680dd7"></script>
+
 </body>
 </html>
