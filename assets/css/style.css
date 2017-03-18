@@ -1,30 +1,5 @@
-#container {
-	/* overflow: hidden;*/
-	height: 400px;
-	background: #edeae8;
-	position: absolute;
-	z-index: -99;
-}
 
-video {
-	position: fixed;
-	background-size: cover;
-	left: 0;
-	right: 0;
-	bottom: 0;
-	top: 0; 
-}
-
-#overlay {
-  position: absolute;
-  top: 0; right: 0; left: 0; bottom: 0;
-  z-index: -99;
-  background: rgba(0,0,0,0.5);
-}
-
-/*---------------------Kevin CSS------------------*/
-
-#page2 {
+body {
 	background-image: url("../../assets/images/picnic.jpg");
 	background-size: auto;
 }
