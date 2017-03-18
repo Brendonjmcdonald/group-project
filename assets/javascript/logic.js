@@ -1,3 +1,5 @@
+$ heroku buildpacks:set heroku/php
+
 // var filterList = [" hiking ", " camping ", " caving ", " trail running ", " snow sports ", " horseback riding ", " mountain biking ", " water sports "];
 
 //Set variables for windows loading page (This is Lake Mary, Fl)
